@@ -35,10 +35,13 @@
           <a class="js-scroll-trigger" href="#page-top">I am Groot</a>
         </li>
         <li class="sidebar-nav-item">
+          <a class="js-scroll-trigger" href="/home/login">로그인</a>
+        </li>
+        <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#page-top">홈</a>
         </li>
         <li class="sidebar-nav-item">
-          <a class="js-scroll-trigger" href="#about">뭘까요</a>
+          <a class="js-scroll-trigger" href="#about">기술임치</a>
         </li>
         <li class="sidebar-nav-item">
           <a class="js-scroll-trigger" href="#services">서비스</a>
@@ -51,6 +54,19 @@
 
     <!-- Header -->
     <header class="masthead d-flex">
+      {% if request.session.user_id  %}
+        <table style="position: absolute; top: 8px;" border="3">
+          <tr>
+            <td>
+              {{ request.session.user_id }} 님 환영합니다.
+            </td>
+            <td>
+              <!--<input type="button" value="로그아웃" onclick="logout()"> 이렇게 쓰고 밑에 logout함수 만들어줘도 됨!-->
+              <input type="button" value="로그아웃" onclick="location='/home/logout'">
+            </td>
+          </tr>
+        </table>
+      {% endif %}
       <div class="container text-center my-auto">
         <div style="margin-top: -120px;">
           <img src="{% static '/protect/img/logo1.png' %}" width="103%">
@@ -59,20 +75,27 @@
         <h3 class="mb-5">
           <h2> 기술임치 관리 서비스</h2>
         </h3><br>
-        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+        <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">아래로</a>
       </div>
       <div class="overlay"></div>
     </header>
 
     <!-- About -->
-    <section class="content-section bg-light" id="about">
+    <section class="content-section bg-light" id="about" style="background-color: #c3c3c3!important;">
       <div class="container text-center">
         <div class="row">
           <div class="col-lg-10 mx-auto">
-            <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
-            <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our friends at
-              <a href="https://unsplash.com/">Unsplash</a>!</p>
-            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+            <h1 style="color : #3389ad; display: inline-block;">기술임치</h1>
+            <h2 style="display: inline-block;">를 통해 여러분의 기술을 보호하세요!</h2><br><br>
+            <!--<p class="lead mb-5">-->
+            <center>
+              <a href="enrollment">
+                <img src="{% static '/protect/img/locked.png' %}" style="width: 25%;">
+                <br><br><br>
+              </a>
+            </center>
+              <!--<a href="https://unsplash.com/">Unsplash</a>!</p>-->
+            <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">아래로</a>
           </div>
         </div>
       </div>
@@ -83,62 +106,59 @@
       <div class="container">
         <div class="content-section-heading">
           <h3 class="text-secondary mb-0">Services</h3>
-          <h2 class="mb-5">What We Offer</h2>
+          <h2 class="mb-5" style="color:#000!important;">What We Offer</h2>
         </div>
         <div class="row">
           <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-screen-smartphone"></i>
-            </span>
-            <h4>
-              <strong>임치기술 등록</strong>
-            </h4>
-            <p class="text-faded mb-0">Looks great on any screen size!</p>
+            <a href="enrollment">
+              <span class="service-icon rounded-circle mx-auto mb-3">
+                <i class="icon-folder"></i>
+              </span>
+              <h4>
+                <strong>임치기술 등록</strong>
+              </h4>
+              <p class="text-faded mb-0">어떤 기술도 임치 가능!</p>
+            </a>
           </div>
           <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-pencil"></i>
-            </span>
-            <h4>
-              <strong>증명서 발급</strong>
-            </h4>
-            <p class="text-faded mb-0">Freshly redesigned for Bootstrap 4.</p>
+            <a href="certificate">
+              <span class="service-icon rounded-circle mx-auto mb-3">
+                <i class="icon-pencil"></i>
+              </span>
+              <h4>
+                <strong>증명서 발급</strong>
+              </h4>
+              <p class="text-faded mb-0">임치증명서가 필요할 경우?</p>
+            </a>
           </div>
           <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-like"></i>
-            </span>
-            <h4>
-              <strong>증명서 검증</strong>
-            </h4>
-            <p class="text-faded mb-0">Millions of users
-              <i class="fas fa-heart"></i>
-              Start Bootstrap!</p>
+            <a href="verification">
+              <span class="service-icon rounded-circle mx-auto mb-3">
+                <i class="icon-like"></i>
+              </span>
+              <h4>
+                <strong>증명서 검증</strong>
+              </h4>
+              <p class="text-faded mb-0">증명서의 위변조 여부 검증!</p>
+            </a>
           </div>
           <div class="col-lg-3 col-md-6">
-            <span class="service-icon rounded-circle mx-auto mb-3">
-              <i class="icon-mustache"></i>
-            </span>
-            <h4>
-              <strong>계약서 검증</strong>
-            </h4>
-            <p class="text-faded mb-0">I mustache you a question...</p>
+            <a href="contract">
+              <span class="service-icon rounded-circle mx-auto mb-3">
+                <i class="icon-mustache"></i>
+              </span>
+              <h4>
+                <strong>계약서 검증</strong>
+              </h4>
+              <p class="text-faded mb-0">계약서의 원본 검증!</p>
+            </a>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Callout -->
-    <section class="callout" style="background : #b0ffd8;">
-      <div class="container text-center">
-        <h2 class="mx-auto mb-5"> 당신의
-          <b>임치 기술을</b> 등록하세요!!</h2>
-        <a class="btn btn-primary btn-xl" href="https://startbootstrap.com/template-overviews/stylish-portfolio/">등록하기!</a>
       </div>
     </section>
 
     <!-- Portfolio -->
-    <section class="content-section" id="portfolio">
+    <section class="content-section" id="portfolio" style="background-color: #c3c3c3;">
       <div class="container">
         <div class="content-section-heading text-center">
           <h3 class="text-secondary mb-0">Portfolio</h3>
@@ -149,44 +169,44 @@
             <a class="portfolio-item" href="#">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>고창희</h2>
-                  <p class="mb-0">28세! Programmer</p>
+                  <h2>고창희(28세)</h2>
+                  <p class="mb-0">Programmer</p>
                 </span>
               </span>
-              <img class="img-fluid" src="{% static '/protect/img/portfolio-1.jpg' %}" alt="">
+              <img class="img-fluid" src="{% static '/protect/img/groot1.jpg' %}" alt="">
             </a>
           </div>
           <div class="col-lg-6">
             <a class="portfolio-item" href="#">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>김진수</h2>
-                  <p class="mb-0">26세! Programmer</p>
+                  <h2>김진수(26세)</h2>
+                  <p class="mb-0">Programmer</p>
                 </span>
               </span>
-              <img class="img-fluid" src="{% static '/protect/img/portfolio-2.jpg' %}" alt="">
+              <img class="img-fluid" src="{% static '/protect/img/groot9.jpg' %}" alt="">
             </a>
           </div>
           <div class="col-lg-6">
             <a class="portfolio-item" href="#">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>서동권</h2>
-                  <p class="mb-0">27세! Programmer</p>
+                  <h2>서동권(27세)</h2>
+                  <p class="mb-0">Programmer</p>
                 </span>
               </span>
-              <img class="img-fluid" src="{% static '/protect/img/portfolio-3.jpg' %}" alt="">
+              <img class="img-fluid" src="{% static '/protect/img/groot6.jpg' %}" alt="">
             </a>
           </div>
           <div class="col-lg-6">
             <a class="portfolio-item" href="#">
               <span class="caption">
                 <span class="caption-content">
-                  <h2>어다희</h2>
-                  <p class="mb-0">26세! Programmer</p>
+                  <h2>어다희(26세)</h2>
+                  <p class="mb-0">Programmer</p>
                 </span>
               </span>
-              <img class="img-fluid" src="{% static '/protect/img/portfolio-4.jpg' %}" alt="">
+              <img class="img-fluid" src="{% static '/protect/img/groot10.jpg' %}" alt="">
             </a>
           </div>
         </div>
@@ -196,33 +216,16 @@
     <!-- Call to Action -->
     <section class="content-section bg-primary text-white">
       <div class="container text-center">
-        <h2 class="mb-4">The buttons below are impossible to resist...</h2>
-        <a href="#" class="btn btn-xl btn-light mr-4">Click Me!</a>
-        <a href="#" class="btn btn-xl btn-dark">Look at Me!</a>
+        <h2 class="mb-4">사소한 아이디어도 안전하게 보호받을 수 있는 세상을 위해</h2>
+        <a href="https://www.kescrow.or.kr/tems/main/page.do" class="btn btn-xl btn-light mr-4" style="border-color: black;">기술임치센터</a>
+        <a href="https://www.ultari.go.kr/portal/ptm/main.do" class="btn btn-xl btn-dark" style="border-color: black;">중소벤처기업부</a>
       </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer text-center">
       <div class="container">
-        <ul class="list-inline mb-5">
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
-              <i class="icon-social-facebook"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white mr-3" href="#">
-              <i class="icon-social-twitter"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="social-link rounded-circle text-white" href="#">
-              <i class="icon-social-github"></i>
-            </a>
-          </li>
-        </ul>
-        <p class="text-muted small mb-0">Copyright &copy; Your Website 2018</p>
+        <p class="text-muted small mb-0">I am Groot &copy; Our Team Website 2018</p>
       </div>
     </footer>
 

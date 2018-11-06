@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'protect/navigation.html' %}
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+{% block content %}
+    <h1> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원가입 </h1>
+    <form method="post">
+        {% csrf_token %}
+
+        아이디 : <input type="text" name="user_id"><br>
+        비밀번호 : <input type="text" name="user_pw"><br>
+        이름 : <input type="text" name="user_name"><br><br>
+        핸드폰번호 : <input type="number" name="user_phonenumber"><br><br>
+        주소 : <input type="text" name="user_address"><br><br>
+
+        <input type="submit" value="회원가입">
+        <!--<button type="submit">회원가입</button> 위랑 똑같은 코드-->
+    </form>
+
+    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+    <script>
+        $('input:submit').click(function() {
+            $.ajax({ // ajax를 JASON형식으로 넘기기
+                url: '{% url "join" %}',
+                type: 'post',
+                data: $('form').serialize(), // form에 입력된 것을 한 줄의 query string으로 만들어버림(입력한 데이터를 편하게 받아올 수 있음)
+                success: function(result) { // 비동기통신을 요청한 후 응답이 온다면(success), 함수를 실행하라(반드시 함수여야함!!)
+                    if(result == '회원가입 완료') {
+                        location = '/home/login'
+                        alert(result) // result는 서버의 모든 응답결과를 담는 변수(views.py의 return 값이라고 생각)
+                    }
+                    else {
+                        alert(result)
+                    }
+                }
+            })
+
+            return false // submit의 기본 기능을 막기 위해서(html은 자꾸 무언갈 보내려하는데 그걸 차단)
+        })
+    </script>
+{% endblock %}
+</body>
+</html>
